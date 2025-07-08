@@ -2,9 +2,11 @@ from openai import OpenAI
 import mysql.connector as mysql
 from datetime import datetime
 from dotenv import load_dotenv
- 
+import os
  
 load_dotenv()
+BDD_USER = os.getenv("BDD_USER")
+BDD_PASSWORD = os.getenv("BDD_PASSWORD")
 client = OpenAI()
  
  
@@ -20,8 +22,8 @@ def create_conversation():
     try:
         bdd = mysql.connect(
             host='localhost',
-            user='root',
-            password='example',
+            user=BDD_USER,
+            password=BDD_PASSWORD,
             database='Logs',
             port=3306
         )
@@ -73,8 +75,8 @@ def stockage_log(conv_id,now, prompt, response, statut):
     try:
         bdd = mysql.connect(
             host='localhost',
-            user='root',
-            password='example',
+            user=BDD_USER,
+            password=BDD_PASSWORD,
             database='Logs',
             port=3306
         )
